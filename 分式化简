@@ -1,0 +1,13 @@
+class Solution {
+public:
+    vector<int> fraction(vector<int>& cont) {
+        int up = 1,down = cont[cont.size()-1];
+        for(int i = cont.size()-2;i >= 0;--i)
+        {
+            up += cont[i] * down;
+            swap(up,down);
+        }    
+        return {down,up};
+    }
+};
+//从最后一个元素来看，最后一个元素的值，是前一个元素的分母，其分子和分母的位置进行交换
