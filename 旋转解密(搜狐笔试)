@@ -1,0 +1,50 @@
+#define _CRT_SECURE_NO_WARNINGS
+/*s1为解密模板，s2为为密码模板，s1顺时针旋转90度，得到一次秘文，
+再顺时针旋转，得到第二次铭文，再顺时针旋转90度，解密
+*/
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+string rotatePassword(vector<string>& array1, vector<string>& array2)
+{
+	string str;
+	int n = array1.size() - 1;
+	int x = 0, y = 0;
+	for (int i = 0; i <= n; i++){
+		for (int j = 0; j <= n; j++){
+			if (array1[i][j] == '0'){
+				str += array2[i][j];
+			}
+		}
+	}
+	for (int i = 0, x = 0; i <= n; i++, x++){
+		for (int j = n, y = 0; j >= 0; j--, y++){
+			if (array1[j][i] == '0'){
+				str += array2[x][y];
+			}
+		}
+	}
+	for (int i = n, x = 0; i >= 0; i--, x++){
+		for (int j = n, y = 0; j >= 0; j--, y++){
+			if (array1[i][j] == '0'){
+				str += array2[x][y];
+			}
+		}
+	}
+	for (int i = n, x = 0; i >= 0; i--, x++){
+		for (int j = 0, y = 0; j <= n; j++, y++){
+			if (array1[j][i] == '0'){
+				str += array2[x][y];
+			}
+		}
+	}
+	return str;
+}
+int main(){
+	vector<string> array1 = { "1101", "1011", "1101", "1110" };
+	vector<string> array2 = { "ABCD", "EFGH", "HIGK", "LMNO" };
+	cout << rotatePassword(array1, array2) << endl;
+	system("pause");
+	return 0;
+}
